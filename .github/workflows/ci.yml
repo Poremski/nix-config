@@ -10,6 +10,9 @@ concurrency:
   group: ci-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  NIX_CONFIG: access-tokens = github.com=${{ github.token }}
+
 jobs:
   flake-check:
     runs-on: self-hosted
