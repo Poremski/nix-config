@@ -13,5 +13,7 @@ _: {
 
   console.useXkbConfig = true;
 
+  programs.kdeconnect.enable = true;
+
   xdg.portal.enable = true;
 }
