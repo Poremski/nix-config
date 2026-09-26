@@ -11,6 +11,7 @@
     ./modules/desktop.nix
     ./modules/home-manager.nix
     ./modules/nix.nix
+    ./modules/onepassword.nix
     ./modules/packages.nix
     ./packages/chatgpt/module.nix
   ];
