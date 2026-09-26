@@ -5,6 +5,8 @@
     username = "javier";
     homeDirectory = "/home/javier";
     stateVersion = "26.05";
+
+    packages = [ pkgs.gh ];
   };
 
   programs.home-manager.enable = true;
