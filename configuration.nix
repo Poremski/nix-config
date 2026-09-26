@@ -10,6 +10,7 @@
     ./hardware-configuration.nix
     ./modules/desktop.nix
     ./modules/home-manager.nix
+    ./modules/laptop.nix
     ./modules/nix.nix
     ./modules/onepassword.nix
     ./modules/packages.nix

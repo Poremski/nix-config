@@ -8,6 +8,11 @@
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixos-hardware = {
+      url = "github:NixOS/nixos-hardware";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -15,6 +20,7 @@
       self,
       nixpkgs,
       home-manager,
+      nixos-hardware,
       ...
     }:
     let
@@ -36,6 +42,7 @@
         modules = [
           ./configuration.nix
           home-manager.nixosModules.home-manager
+          nixos-hardware.nixosModules.lenovo-thinkpad-x1-7th-gen
         ];
       };
     };
