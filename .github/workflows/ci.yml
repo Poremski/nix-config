@@ -27,11 +27,15 @@ jobs:
         uses: DeterminateSystems/determinate-nix-action@v3
 
       - name: Check formatting
+        env:
+          NIX_CONFIG: access-tokens = github.com=${{ github.token }}
         run: |
           nix fmt
           git diff --exit-code
 
       - name: Check flake
+        env:
+          NIX_CONFIG: access-tokens = github.com=${{ github.token }}
         run: nix flake check --no-build
 
   master:
@@ -50,12 +54,18 @@ jobs:
         uses: DeterminateSystems/determinate-nix-action@v3
 
       - name: Check formatting
+        env:
+          NIX_CONFIG: access-tokens = github.com=${{ github.token }}
         run: |
           nix fmt
           git diff --exit-code
 
       - name: Check flake
+        env:
+          NIX_CONFIG: access-tokens = github.com=${{ github.token }}
         run: nix flake check --no-build
 
       - name: Build NixOS configuration
+        env:
+          NIX_CONFIG: access-tokens = github.com=${{ github.token }}
         run: nix build --no-link .#nixosConfigurations.poremski.config.system.build.toplevel
