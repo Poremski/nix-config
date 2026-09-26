@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  pull-request:
+    name: Validate pull request
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Install Nix
+        uses: DeterminateSystems/determinate-nix-action@v3
+
+      - name: Check formatting
+        run: |
+          nix fmt
+          git diff --exit-code
+
+      - name: Check flake
+        run: nix flake check --no-build
+
+  master:
+    name: Check and build master
+    if: github.event_name == 'push'
+    runs-on:
+      - self-hosted
+      - linux
+      - x64
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Install Nix
+        uses: DeterminateSystems/determinate-nix-action@v3
+
+      - name: Check formatting
+        run: |
+          nix fmt
+          git diff --exit-code
+
+      - name: Check flake
+        run: nix flake check --no-build
+
+      - name: Build NixOS configuration
+        run: nix build --no-link .#nixosConfigurations.poremski.config.system.build.toplevel
