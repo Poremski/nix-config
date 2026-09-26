@@ -6,7 +6,11 @@
     homeDirectory = "/home/javier";
     stateVersion = "26.05";
 
-    packages = [ pkgs.gh ];
+    packages = with pkgs; [
+      gh
+      kdePackages.kate
+      thunderbird
+    ];
   };
 
   programs = {

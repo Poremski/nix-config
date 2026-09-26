@@ -8,13 +8,13 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./modules/chatgpt.nix
     ./modules/desktop.nix
     ./modules/home-manager.nix
     ./modules/laptop.nix
     ./modules/nix.nix
     ./modules/onepassword.nix
     ./modules/packages.nix
-    ./packages/chatgpt/module.nix
   ];
 
   # Use the systemd-boot EFI boot loader.

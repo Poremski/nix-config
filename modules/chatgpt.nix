@@ -32,6 +32,6 @@
   };
 
   environment.systemPackages = [
-    (pkgs.callPackage ./default.nix { })
+    (pkgs.callPackage ../packages/chatgpt { })
   ];
 }

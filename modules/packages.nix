@@ -9,9 +9,4 @@
     codex
     git
   ];
-
-  users.users.javier.packages = with pkgs; [
-    kdePackages.kate
-    thunderbird
-  ];
 }

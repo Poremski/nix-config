@@ -32,10 +32,11 @@ as part of the NixOS configuration.
 - `configuration.nix`: base settings and module imports.
 - `hardware-configuration.nix`: machine-specific disks and hardware settings.
 - `modules/`: desktop, laptop support, packages, Nix maintenance, Home Manager,
-  and 1Password.
+  ChatGPT, and 1Password.
 - `home/javier.nix`: user environment, Bash, Git, GitHub CLI, and GPG agent
   with SSH support.
-- `packages/chatgpt/`: ChatGPT package definition and NixOS module.
+- `packages/chatgpt/`: ChatGPT package definition.
+- `modules/chatgpt.nix`: ChatGPT installation and nix-ld settings.
 - `.github/workflows/ci.yml`: automated checks for pushes and pull requests.
 
 ## Bootstrap
