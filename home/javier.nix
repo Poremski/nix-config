@@ -9,14 +9,35 @@
     packages = [ pkgs.gh ];
   };
 
-  programs.home-manager.enable = true;
+  programs = {
+    home-manager.enable = true;
 
-  programs.bash = {
-    enable = true;
-    enableCompletion = true;
+    bash = {
+      enable = true;
+      enableCompletion = true;
+    };
+
+    gpg.enable = true;
+
+    git = {
+      enable = true;
+
+      signing = {
+        key = "D85178CF97840B3927A80750FC7EE837A78AC7BD";
+        format = "openpgp";
+        signByDefault = true;
+      };
+
+      settings = {
+        user = {
+          name = "Javier Poremski";
+          email = "javier@poremski.se";
+        };
+
+        init.defaultBranch = "master";
+      };
+    };
   };
-
-  programs.gpg.enable = true;
 
   services.gpg-agent = {
     enable = true;
@@ -25,22 +46,4 @@
     pinentry.package = pkgs.pinentry-qt;
   };
 
-  programs.git = {
-    enable = true;
-
-    signing = {
-      key = "D85178CF97840B3927A80750FC7EE837A78AC7BD";
-      format = "openpgp";
-      signByDefault = true;
-    };
-
-    settings = {
-      user = {
-        name = "Javier Poremski";
-        email = "javier@poremski.se";
-      };
-
-      init.defaultBranch = "master";
-    };
-  };
 }

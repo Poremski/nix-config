@@ -28,6 +28,20 @@
       pkgs = nixpkgs.legacyPackages.${system};
     in
     {
+      packages.${system}.lint = pkgs.writeShellApplication {
+        name = "lint";
+        runtimeInputs = with pkgs; [
+          deadnix
+          markdownlint-cli2
+          statix
+        ];
+        text = ''
+          statix check --ignore hardware-configuration.nix .
+          deadnix --fail --exclude hardware-configuration.nix .
+          markdownlint-cli2 "**/*.md" "#.git/**"
+        '';
+      };
+
       formatter.${system} = pkgs.treefmt.withConfig {
         runtimeInputs = [ pkgs.nixfmt ];
         settings.formatter.nixfmt = {

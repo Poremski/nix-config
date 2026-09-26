@@ -18,11 +18,13 @@
   ];
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot = {
+    loader.systemd-boot.enable = true;
+    loader.efi.canTouchEfiVariables = true;
 
-  boot.initrd.luks.devices."luks-dbcf6bf5-db50-4ba6-81c0-af1cfe4cb8ce".device =
-    "/dev/disk/by-uuid/dbcf6bf5-db50-4ba6-81c0-af1cfe4cb8ce";
+    initrd.luks.devices."luks-dbcf6bf5-db50-4ba6-81c0-af1cfe4cb8ce".device =
+      "/dev/disk/by-uuid/dbcf6bf5-db50-4ba6-81c0-af1cfe4cb8ce";
+  };
   networking.hostName = "poremski"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 

@@ -1,29 +1,30 @@
-{ ... }:
+_:
 
 {
-  services.xserver = {
-    enable = true;
-    xkb = {
-      layout = "us";
-      variant = "intl";
+  services = {
+    xserver = {
+      enable = true;
+      xkb = {
+        layout = "us";
+        variant = "intl";
+      };
+    };
+
+    displayManager.sddm.enable = true;
+    desktopManager.plasma6.enable = true;
+
+    printing.enable = true;
+
+    pulseaudio.enable = false;
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
     };
   };
 
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
-
   console.keyMap = "us-acentos";
-
-  services.printing.enable = true;
-
-  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
-
   programs.firefox.enable = true;
 }

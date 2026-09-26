@@ -33,13 +33,18 @@ jobs:
           nix fmt
           git diff --exit-code
 
+      - name: Lint Nix and Markdown
+        env:
+          NIX_CONFIG: access-tokens = github.com=${{ github.token }}
+        run: nix run .#lint
+
       - name: Check flake
         env:
           NIX_CONFIG: access-tokens = github.com=${{ github.token }}
         run: nix flake check --no-build
 
   master:
-    name: Check and build master
+    name: Validate master
     if: github.event_name == 'push'
     runs-on:
       - self-hosted
@@ -60,12 +65,12 @@ jobs:
           nix fmt
           git diff --exit-code
 
+      - name: Lint Nix and Markdown
+        env:
+          NIX_CONFIG: access-tokens = github.com=${{ github.token }}
+        run: nix run .#lint
+
       - name: Check flake
         env:
           NIX_CONFIG: access-tokens = github.com=${{ github.token }}
         run: nix flake check --no-build
-
-      - name: Build NixOS configuration
-        env:
-          NIX_CONFIG: access-tokens = github.com=${{ github.token }}
-        run: nix build --no-link .#nixosConfigurations.poremski.config.system.build.toplevel
