@@ -54,6 +54,29 @@ let
   '';
 in
 {
+  programs.plasma = {
+    enable = true;
+
+    workspace = {
+      colorScheme = "BreezeDark";
+      lookAndFeel = "org.kde.breezedark.desktop";
+    };
+
+    input.touchpads = [
+      {
+        enable = true;
+        name = "SYNA8004:00 06CB:CD8B Touchpad";
+        vendorId = "06cb";
+        productId = "cd8b";
+
+        naturalScroll = true;
+        scrollMethod = "twoFingers";
+        tapToClick = false;
+        tapAndDrag = false;
+        rightClickMethod = "twoFingers";
+      }
+    ];
+  };
 
   xdg.configFile."plasma-localerc".text = ''
     [Formats]

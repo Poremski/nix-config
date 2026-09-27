@@ -85,8 +85,10 @@ sudo nixos-rebuild boot --flake .#poremski
 
 ## Daily environment
 
-Fish is the login shell. Bash remains available. Home Manager installs
-LibreOffice, VLC, qBittorrent, Kate, Thunderbird, Zed, and development tools.
+Fish is the login shell. Bash remains available. Home Manager and Plasma Manager
+configure the user environment, including Breeze Dark and touchpad preferences.
+Home Manager installs LibreOffice, VLC, qBittorrent, Kate, Thunderbird, Zed, and
+development tools.
 Docker and Docker Compose are available without `sudo`. Log out and back in after
 the first activation so the new `docker` group membership takes effect. The SSH
 client configuration is managed declaratively by Home Manager and uses the GPG

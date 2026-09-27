@@ -13,6 +13,12 @@
       url = "github:NixOS/nixos-hardware";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    plasma-manager = {
+      url = "github:nix-community/plasma-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
   };
 
   outputs =
@@ -21,6 +27,7 @@
       nixpkgs,
       home-manager,
       nixos-hardware,
+      plasma-manager,
       ...
     }:
     let
@@ -56,6 +63,7 @@
         modules = [
           ./configuration.nix
           home-manager.nixosModules.home-manager
+          { home-manager.sharedModules = [ plasma-manager.homeModules.plasma-manager ]; }
           nixos-hardware.nixosModules.lenovo-thinkpad-x1-7th-gen
         ];
       };
