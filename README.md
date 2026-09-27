@@ -35,7 +35,7 @@ as part of the NixOS configuration.
   ChatGPT, and 1Password.
 - `home/javier.nix`: user environment, Bash, Git, GitHub CLI, and GPG agent
   with SSH support.
-- `home/modules/`: Fish, development tools, terminal tools, editors, and KDE.
+- `home/modules/`: Fish, SSH, development tools, terminal tools, editors, and KDE.
 - `config/nvim/`: Neovim settings, keymaps, autocommands, and plugin setup.
 - `bin/`: helper commands for rebuilding, updating, formatting, and linting.
 - `packages/chatgpt/`: ChatGPT package definition.
@@ -87,9 +87,11 @@ sudo nixos-rebuild boot --flake .#poremski
 
 Fish is the login shell. Bash remains available. Home Manager installs
 LibreOffice, VLC, qBittorrent, Kate, Thunderbird, Zed, and development tools.
-Docker and Docker Compose are available using `sudo docker` and
-`sudo docker compose`. Mullvad requires signing in to your account after
-activation. KDE Connect and the ThinkPad keyboard-backlight indicator are enabled.
+Docker and Docker Compose are available without `sudo`. Log out and back in after
+the first activation so the new `docker` group membership takes effect. The SSH
+client configuration is managed declaratively by Home Manager and uses the GPG
+agent for SSH keys. Mullvad requires signing in to your account after activation.
+KDE Connect and the ThinkPad keyboard-backlight indicator are enabled.
 
 The repository's `bin` directory is added to your PATH after activation:
 

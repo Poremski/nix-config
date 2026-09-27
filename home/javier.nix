@@ -8,6 +8,7 @@
     ./modules/zed.nix
     ./modules/desktop.nix
     ./modules/shell.nix
+    ./modules/ssh.nix
   ];
   xdg.userDirs = {
     enable = true;
