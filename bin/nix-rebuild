@@ -7,7 +7,7 @@ for arg in "$@"; do
   case "$arg" in
     poremski) host="$arg" ;;
     --full-check) full_check=1 ;;
-    -h|--help) printf 'Usage: rebuild [poremski] [--full-check]\n'; exit 0 ;;
+    -h|--help) printf 'Usage: nix-rebuild [poremski] [--full-check]\n'; exit 0 ;;
     *) printf 'Unknown argument: %s\n' "$arg" >&2; exit 1 ;;
   esac
 done

@@ -93,15 +93,17 @@ activation. KDE Connect and the ThinkPad keyboard-backlight indicator are enable
 
 The repository's `bin` directory is added to your PATH after activation:
 
-- `rebuild`: activate the `poremski` configuration with `nixos-rebuild switch`.
-- `sync`: pull with `--ff-only`, then rebuild (shadows the system `sync` command).
-- `update`: update flake inputs, then rebuild; review the resulting lock file.
-- `fmt`: format Nix files.
-- `lint`: check Nix and Markdown files.
+- `nix-rebuild`: activate the `poremski` configuration with
+  `nixos-rebuild switch`.
+- `nix-sync`: pull with `--ff-only`, then run `nix-rebuild`.
+- `nix-update`: update flake inputs, then run `nix-rebuild`; review the
+  resulting lock file before committing it.
+- `nix-fmt`: format Nix files.
+- `nix-lint`: check Nix and Markdown files.
 
-`rebuild`, `sync`, and `update` accept `--full-check` to run flake evaluation
-before rebuilding. Before activation, use `bash bin/rebuild` from the repo.
-Use `/run/current-system/sw/bin/sync` when you need the system disk-sync command.
+`nix-rebuild`, `nix-sync`, and `nix-update` accept `--full-check` to run flake
+evaluation before rebuilding. Before activation, use `bash bin/nix-rebuild`
+from the repository.
 
 ## Neovim
 
