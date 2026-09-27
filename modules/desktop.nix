@@ -27,4 +27,5 @@ _:
   console.keyMap = "us-acentos";
   security.rtkit.enable = true;
   programs.firefox.enable = true;
+  programs.kdeconnect.enable = true;
 }

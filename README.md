@@ -35,6 +35,9 @@ as part of the NixOS configuration.
   ChatGPT, and 1Password.
 - `home/javier.nix`: user environment, Bash, Git, GitHub CLI, and GPG agent
   with SSH support.
+- `home/modules/`: Fish, development tools, terminal tools, editors, and KDE.
+- `config/nvim/`: Neovim settings, keymaps, autocommands, and plugin setup.
+- `bin/`: helper commands for rebuilding, updating, formatting, and linting.
 - `packages/chatgpt/`: ChatGPT package definition.
 - `modules/chatgpt.nix`: ChatGPT installation and nix-ld settings.
 - `.github/workflows/ci.yml`: automated checks for pushes and pull requests.
@@ -47,9 +50,8 @@ Before using it on another machine, adapt the disks, LUKS devices,
 hardware profile, username, and GPG settings to your environment.
 
 ```bash
-mkdir -p ~/Projects
-git clone https://github.com/Poremski/nix-config.git ~/Projects/nix-config
-cd ~/Projects/nix-config
+git clone https://github.com/Poremski/nix-config.git ~/.nix-config
+cd ~/.nix-config
 ```
 
 Build and temporarily activate the configuration for testing:
@@ -80,6 +82,58 @@ Prepare the current configuration for the next boot without activating it now:
 ```bash
 sudo nixos-rebuild boot --flake .#poremski
 ```
+
+## Daily environment
+
+Fish is the login shell. Bash remains available. Home Manager installs
+LibreOffice, VLC, qBittorrent, Kate, Thunderbird, Zed, and development tools.
+Docker and Docker Compose are available using `sudo docker` and
+`sudo docker compose`. Mullvad requires signing in to your account after
+activation. KDE Connect and the ThinkPad keyboard-backlight indicator are enabled.
+
+The repository's `bin` directory is added to your PATH after activation:
+
+- `rebuild`: activate the `poremski` configuration with `nixos-rebuild switch`.
+- `sync`: pull with `--ff-only`, then rebuild (shadows the system `sync` command).
+- `update`: update flake inputs, then rebuild; review the resulting lock file.
+- `fmt`: format Nix files.
+- `lint`: check Nix and Markdown files.
+
+`rebuild`, `sync`, and `update` accept `--full-check` to run flake evaluation
+before rebuilding. Before activation, use `bash bin/rebuild` from the repo.
+Use `/run/current-system/sw/bin/sync` when you need the system disk-sync command.
+
+## Neovim
+
+Neovim is the default editor, with `vi` and `vim` aliases. Plugins, language
+servers, and Treesitter parsers are provided by Nix and pinned by `flake.lock`.
+There is no plugin manager to bootstrap at startup.
+
+Start with `:Tutor` to learn basic editing. Press Escape to return to normal
+mode. The leader key is Space; the following shortcuts use normal mode:
+
+| Shortcut | Action |
+| --- | --- |
+| Space w / Space q | Save / close window |
+| Space e | Browse files |
+| Space ff / Space fg | Find files / search text |
+| Space fb / Space fh | Open buffers / search help |
+| gd / gr / K | Definition / references / documentation |
+| Space rn / Space ca | Rename symbol / code action |
+| Ctrl-h/j/k/l | Move between split windows |
+
+In insert mode, Ctrl-Space opens completion, Tab/Shift-Tab select an entry,
+and Enter confirms an explicitly selected entry. Language features activate
+when a server recognizes the file and project. Use `:checkhealth vim.lsp`
+to diagnose language-server issues.
+
+Edit `config/nvim/options.lua` for basic settings, `keymaps.lua` for shortcuts,
+`autocmds.lua` for automatic behavior, and `plugins.lua` for plugin settings.
+Add plugins or language-server packages in `home/modules/neovim.nix`.
+Rebuild after editing these files, then restart Neovim.
+
+Zed uses declarative settings in `home/modules/zed.nix`. Edit that file and
+rebuild to change persistent settings.
 
 ## Checks
 

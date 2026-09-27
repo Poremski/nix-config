@@ -2,13 +2,16 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ ... }:
+{ pkgs, ... }:
 
 {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./modules/chatgpt.nix
+    ./modules/docker.nix
+    ./modules/fonts.nix
+    ./modules/mullvad.nix
     ./modules/desktop.nix
     ./modules/home-manager.nix
     ./modules/laptop.nix
@@ -19,8 +22,13 @@
 
   # Use the systemd-boot EFI boot loader.
   boot = {
-    loader.systemd-boot.enable = true;
-    loader.efi.canTouchEfiVariables = true;
+    loader = {
+      systemd-boot = {
+        enable = true;
+        configurationLimit = 10;
+      };
+      efi.canTouchEfiVariables = true;
+    };
 
     initrd.luks.devices."luks-dbcf6bf5-db50-4ba6-81c0-af1cfe4cb8ce".device =
       "/dev/disk/by-uuid/dbcf6bf5-db50-4ba6-81c0-af1cfe4cb8ce";
@@ -56,6 +64,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users."javier" = {
     isNormalUser = true;
+    shell = pkgs.fish;
     description = "Javier Poremski";
     extraGroups = [
       "networkmanager"
@@ -64,6 +73,7 @@
   };
 
   # List services that you want to enable:
+  programs.fish.enable = true;
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
