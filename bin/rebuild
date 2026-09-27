@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -euo pipefail
+repo_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+host=poremski
+full_check=0
+for arg in "$@"; do
+  case "$arg" in
+    poremski) host="$arg" ;;
+    --full-check) full_check=1 ;;
+    -h|--help) printf 'Usage: rebuild [poremski] [--full-check]\n'; exit 0 ;;
+    *) printf 'Unknown argument: %s\n' "$arg" >&2; exit 1 ;;
+  esac
+done
+if ((full_check)); then nix flake check --no-build "$repo_dir"; fi
+sudo nixos-rebuild switch --flake "$repo_dir#$host"

@@ -1,0 +1,43 @@
+{
+  config,
+  pkgs,
+  ...
+}:
+{
+  home = {
+    packages = [
+      pkgs.cargo
+      pkgs.gcc
+      pkgs.go
+      pkgs.gnumake
+      pkgs.jdk
+      pkgs.lua5_1
+      pkgs.luarocks
+      pkgs.prettier
+      pkgs.nodejs
+      pkgs.php
+      pkgs.python3
+      pkgs.python3Packages.black
+      pkgs.ruff
+      pkgs.rustPackages.clippy
+      pkgs.rustPackages.rustfmt
+      pkgs.rustc
+      pkgs.wl-clipboard
+    ];
+
+    sessionPath = [
+      "${config.home.homeDirectory}/.cargo/bin"
+      "${config.home.homeDirectory}/.nix-config/bin"
+      "${config.home.homeDirectory}/.local/bin"
+    ];
+
+    file.".npmrc".text = ''
+      prefix=${config.home.homeDirectory}/.local
+    '';
+  };
+
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
+}

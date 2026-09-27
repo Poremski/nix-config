@@ -1,6 +1,19 @@
 { pkgs, ... }:
 
 {
+  imports = [
+    ./modules/development.nix
+    ./modules/tools.nix
+    ./modules/neovim.nix
+    ./modules/zed.nix
+    ./modules/desktop.nix
+    ./modules/shell.nix
+  ];
+  xdg.userDirs = {
+    enable = true;
+    createDirectories = true;
+    setSessionVariables = true;
+  };
   home = {
     username = "javier";
     homeDirectory = "/home/javier";
@@ -10,6 +23,9 @@
       gh
       kdePackages.kate
       thunderbird
+      libreoffice
+      vlc
+      qbittorrent
     ];
   };
 
@@ -33,6 +49,8 @@
       };
 
       settings = {
+        core.editor = "nvim";
+        push.autoSetupRemote = true;
         user = {
           name = "Javier Poremski";
           email = "javier@poremski.se";
@@ -46,6 +64,7 @@
   services.gpg-agent = {
     enable = true;
     enableSshSupport = true;
+    enableFishIntegration = true;
     sshKeys = [ "7A4F2E1CAF436D00CC46DE5B022FACD79B10C33A" ];
     pinentry.package = pkgs.pinentry-qt;
   };
