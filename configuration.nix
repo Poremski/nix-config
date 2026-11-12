@@ -30,10 +30,14 @@
       efi.canTouchEfiVariables = true;
     };
 
-    initrd.luks.devices."luks-dbcf6bf5-db50-4ba6-81c0-af1cfe4cb8ce".device =
-      "/dev/disk/by-uuid/dbcf6bf5-db50-4ba6-81c0-af1cfe4cb8ce";
+    initrd.luks.devices."luks-90615163-2305-486f-8cc2-85cdc34c953f".device =
+      "/dev/disk/by-uuid/90615163-2305-486f-8cc2-85cdc34c953f";
   };
-  networking.hostName = "poremski"; # Define your hostname.
+
+  networking = {
+    hostName = "poremski";
+    domain = "home.arpa";
+  };
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
