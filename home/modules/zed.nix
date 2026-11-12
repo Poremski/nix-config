@@ -16,6 +16,7 @@
     ];
 
     userSettings = {
+      agent_servers.codex-acp.type = "registry";
       vim_mode = false;
       ui_font_size = 16;
       buffer_font_size = 16;
