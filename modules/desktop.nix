@@ -6,7 +6,7 @@ _:
       enable = true;
       xkb = {
         layout = "us";
-        variant = "intl";
+        variant = "colemak_dh_iso";
       };
     };
 
@@ -24,7 +24,10 @@ _:
     };
   };
 
-  console.keyMap = "us-acentos";
+  console = {
+    earlySetup = true;
+    useXkbConfig = true;
+  };
   security.rtkit.enable = true;
   programs.firefox.enable = true;
   programs.kdeconnect.enable = true;
