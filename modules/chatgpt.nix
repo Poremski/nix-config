@@ -1,7 +1,7 @@
-{ pkgs, ... }:
+{ pkgsUnstable, ... }:
 
 {
   environment.systemPackages = [
-    (pkgs.callPackage ../packages/chatgpt { })
+    pkgsUnstable.chatgpt
   ];
 }

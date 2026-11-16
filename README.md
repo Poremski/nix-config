@@ -32,14 +32,13 @@ as part of the NixOS configuration.
 - `configuration.nix`: base settings and module imports.
 - `hardware-configuration.nix`: machine-specific disks and hardware settings.
 - `modules/`: desktop, laptop support, packages, Nix maintenance, Home Manager,
-  ChatGPT, and 1Password.
+  and 1Password.
 - `home/javier.nix`: user environment, Bash, Git, GitHub CLI, and GPG agent
   with SSH support.
 - `home/modules/`: Fish, SSH, development tools, terminal tools, editors, and KDE.
 - `config/nvim/`: Neovim settings, keymaps, autocommands, and plugin setup.
 - `bin/`: helper commands for rebuilding, updating, formatting, and linting.
-- `packages/chatgpt/`: ChatGPT package definition.
-- `modules/chatgpt.nix`: ChatGPT installation and nix-ld settings.
+- `modules/nix-ld.nix`: system-wide compatibility for foreign Linux binaries.
 - `.github/workflows/ci.yml`: automated checks for pushes and pull requests.
 
 ## Bootstrap
@@ -178,11 +177,6 @@ sudo nixos-rebuild test --flake .#poremski
 ```
 
 Review and commit the changes to `flake.lock` once the test succeeds.
-
-The ChatGPT package is fetched from a `latest` URL with a fixed SHA-256 hash in
-`packages/chatgpt/default.nix`. If the upstream file changes, Nix rejects it
-until the package source has been verified and the hash updated. A cached
-copy may mean this only becomes apparent on another machine or runner.
 
 ## License
 

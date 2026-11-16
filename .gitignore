@@ -1,2 +1,2 @@
-# Downloaded by Nix from the URL in packages/chatgpt/default.nix.
+# Legacy local download; ChatGPT is now sourced from nixpkgs-unstable.
 /packages/chatgpt/chatgpt_amd64.deb
