@@ -1,5 +1,6 @@
 {
   pkgs,
+  osConfig,
   ...
 }:
 let
@@ -80,8 +81,7 @@ in
 
   xdg.configFile."plasma-localerc".text = ''
     [Formats]
-    LANG=en_US.UTF-8
-    LC_TIME=sv_SE.UTF-8
+    LANG=${osConfig.i18n.defaultLocale}
   '';
 
   systemd.user.services.thinkpad-kbd-backlight-notify = {
